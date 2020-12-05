@@ -1,0 +1,43 @@
+{
+    "name": "Apache Airflow",
+    "description": "Apache Airflow on Heroku",
+    "addons": [
+      "heroku-postgresql",
+      "heroku-redis"
+    ],
+    "env": {
+      "AIRFLOW__CORE__FERNET_KEY": {
+         "description": "Fernet key to encrypt database.  See README.md for instructions to generate new one.",
+         "generator": "secret"
+      },
+      "AIRFLOW__CORE__SQL_ALCHEMY_CONN": {
+        "description": "Database connection string",
+        "required": true
+      },
+      "AIRFLOW__CORE__LOAD_EXAMPLES": {
+          "value": "False"
+      },
+      "AIRFLOW_HOME": {
+         "description": "Location of AIRFLOW_HOME",
+         "value": "/app"
+      },
+      "AIRFLOW__WEBSERVER__AUTHENTICATE": {
+          "value": "True"
+      },
+      "AIRFLOW__WEBSERVER__AUTH_BACKEND": {
+          "value": "airflow.contrib.auth.backends.password_auth"
+      },
+      "AIRFLOW__CELERY__RESULT_BACKEND": {
+          "description": "Celery result backend",
+          "required": true
+      },
+      "AIRFLOW__CELERY__BROKER_URL": {
+          "description": "Celery broker URL",
+          "required": true
+      },
+      "AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__VISIBILITY_TIMEOUT": {
+          "description": "Visibility timeout",
+          "value": 21600
+      }
+    }
+  }
